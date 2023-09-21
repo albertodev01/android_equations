@@ -1,0 +1,42 @@
+name: Equations library GitHub Pages deployment
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Generate HTML documentation
+        run: ./gradlew dokkaHTML
+
+      - name: Setting the git username
+        run: git config user.name github-actions
+
+      - name: Setting the git email
+        run: git config user.email github-actions@github.com
+
+      - name: Adding source
+        run: git --work-tree equations/build/dokka/html add --all
+
+      - name: Adding a commit message
+        run: git commit -m "Automatic deployment by github-actions"
+
+      - name: Automatic web deployment
+        run: git push origin HEAD:equations_library_doc --force        
