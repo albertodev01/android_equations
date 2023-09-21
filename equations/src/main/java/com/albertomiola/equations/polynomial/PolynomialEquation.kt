@@ -37,6 +37,10 @@ To solve a polynomial equation (unless it's a constant), the coefficient with th
  *
  * This class stores the coefficients list starting from the one with the **highest** degree.
  *
+ * @property coefficients The
+ *
+ * @throws PolynomialEquation s
+ *
  * @author Alberto Miola
  * */
 abstract class PolynomialEquation(val coefficients: List<Complex>) {
@@ -51,6 +55,8 @@ abstract class PolynomialEquation(val coefficients: List<Complex>) {
      * A polynomial equation is **valid** if the coefficient associated to the variable of highest
      * degree is different from zero. In other words, the polynomial is valid if `a` is different
      * from zero.
+     *
+     * @author Alberto Miola
      * */
     private val isValid: Boolean get() = !coefficients.first().isZero || this is Constant
 
@@ -65,7 +71,7 @@ abstract class PolynomialEquation(val coefficients: List<Complex>) {
         get() = coefficients.all { c -> c.imaginary == 0.0 }
 
     /**
-     * The degree of the polynomial.
+     * Returns the degree of the polynomial.
      *
      * @author Alberto Miola
      * */
@@ -288,9 +294,7 @@ abstract class PolynomialEquation(val coefficients: List<Complex>) {
      *
      * @author Alberto Miola
      * */
-    operator fun div(other: PolynomialEquation): PolynomialDivisionResult {
-        return PolynomialLongDivision(this, other).divide()
-    }
+    operator fun div(other: PolynomialEquation) = PolynomialLongDivision(this, other).divide()
 
     /**
      * Returns the polynomial discriminant, if it exists.

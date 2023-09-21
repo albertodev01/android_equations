@@ -151,6 +151,9 @@ internal class ComplexTest {
         val negation = Complex(3, -5)
         assertEquals(-negation, Complex(-3, 5))
         assertEquals(-(-negation), negation)
+
+        val negativePhase = Complex(-0.5, -1.0)
+        assertEquals(negativePhase.phase(), -2.0344, absoluteTolerance = 1.0e-4)
     }
 
     @Test

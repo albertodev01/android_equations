@@ -38,7 +38,7 @@ abstract class Rational : Comparable<Rational> {
     /**
      * Returns the floating point representation of this rational number.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     abstract fun toDouble(): Double
 
@@ -47,14 +47,14 @@ abstract class Rational : Comparable<Rational> {
      *
      * @return A new [Rational] object whose sign is inverted.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     abstract fun negate(): Rational
 
     /**
      * Reduces this rational number to the lowest terms and returns a new [Rational] object.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     abstract fun reduce(): Rational
 
@@ -62,7 +62,7 @@ abstract class Rational : Comparable<Rational> {
      * The dividend `a` of the `a/b` division, which also is the numerator of the associated
      * fraction.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     abstract val numerator: Int
 
@@ -70,21 +70,21 @@ abstract class Rational : Comparable<Rational> {
      * The divisor `b` of the `a/b` division, which also is the denominator of the associated
      * fraction.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     abstract val denominator: Int
 
     /**
      * True or false whether this rational number is positive or negative.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     abstract val isNegative: Boolean
 
     /**
      * True or false whether this rational number is whole or not.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     abstract val isWhole: Boolean
 

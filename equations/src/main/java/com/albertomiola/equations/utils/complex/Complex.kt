@@ -13,22 +13,42 @@ import kotlin.math.*
  *
  * @constructor Creates a complex number with the given real and imaginary parts.
  *
+ * @property real The real part of the complex number.
+ * @property imaginary The imaginary part of the complex number.
+ *
  * @author Alberto Miola
  * */
 class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
     /**
-     * This is the same as calling `Complex(0, 0)`.
-     *
-     * @constructor Assigns `0` to the real and imaginary part of the complex number.
+     * @constructor Assigns `0` to the real and imaginary part of the complex number. This is the
+     * same as calling `Complex(0, 0)`.
      *
      * @author Alberto Miola
      * */
     constructor() : this(0.0, 0.0)
 
+    /**
+     * @constructor The [realPart] parameter is assigned to the real part of the complex number,
+     * while the imaginary part is set to `0.0`.
+     *
+     * @author Alberto Miola
+     * */
     constructor(realPart: Double) : this(realPart, 0.0)
 
+    /**
+     * @constructor The [realPart] parameter is assigned to the real part of the complex number,
+     * while the imaginary part is set to `0.0`.
+     *
+     * @author Alberto Miola
+     * */
     constructor(realPart: Int) : this(realPart.toDouble(), 0.0)
 
+    /**
+     * @constructor Converts [realPart] and [complexPart] integer values to [Double] values. This is
+     * the same as calling `Complex(realPart.toDouble(), complexPart.toDouble())`
+     *
+     * @author Alberto Miola
+     * */
     constructor(realPart: Int, complexPart: Int) : this(realPart.toDouble(), complexPart.toDouble())
 
     /**
@@ -71,6 +91,11 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
 
     override fun toString() = getStringRepresentation()
 
+    /**
+     * Returns a **deep** copy of the object and optionally uses the given parameters, if not null.
+     *
+     * @author Alberto
+     * */
     fun copy(real: Double? = null, imaginary: Double? = null): Complex {
         return Complex(real ?: this.real, imaginary ?: this.imaginary)
     }
@@ -267,6 +292,13 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
         return Complex(a, b)
     }
 
+    /**
+     * The negation of a complex number.
+     *
+     * @return A [Complex] object where the signs of [real] and [imaginary] are inverted.
+     *
+     * @author Alberto Miola
+     * */
     fun negate() = Complex(-real, -imaginary)
 
     /**
@@ -274,7 +306,7 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
      *
      * @return A [Complex] object that is the sum of this and [other] complex numbers.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun plus(other: Complex) = Complex(real + other.real, imaginary + other.imaginary)
 
@@ -283,7 +315,7 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
      *
      * @return A [Complex] object that is the difference between this and [other] complex numbers.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun minus(other: Complex) = Complex(real - other.real, imaginary - other.imaginary)
 
@@ -292,7 +324,7 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
      *
      * @return A [Complex] object that is the product of this and [other] complex numbers.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun times(other: Complex): Complex {
         val realPart = real * other.real - imaginary * other.imaginary
@@ -305,14 +337,33 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
      *
      * @return A [Complex] object that is the division of this and [other] complex numbers.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun div(other: Complex) = this * other.reciprocal()
 
+    /**
+     * The negation of the complex number.
+     *
+     * @return A [Complex] object whose sign is inverted. This is the same as calling [negate].
+     *
+     * @see negate
+     *
+     * @author Alberto Miola
+     * */
     operator fun unaryMinus() = negate()
 
+    /**
+     * Destructures the [real] value of this object.
+     *
+     * @author Alberto Miola
+     * */
     operator fun component1(): Double = real
 
+    /**
+     * Destructures the [imaginary] value of this object.
+     *
+     * @author Alberto Miola
+     * */
     operator fun component2(): Double = imaginary
 
     /**
@@ -321,7 +372,7 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
      * @see createFromFraction
      * @see createFromPolarCoordinates
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     companion object Factory {
         /**
@@ -333,6 +384,8 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
 
         /**
          * Creates a complex number from a [Fraction] objects.
+         *
+         * @return A [Complex] object that is built from a fraction.
          *
          * @author Alberto Miola
          * */
@@ -354,7 +407,7 @@ class Complex(val real: Double, val imaginary: Double) : Comparable<Complex> {
          * By default, the angle [theta] must be expressed in *radians* but `angleInRadians = false`
          * allows the value to be in degrees.
          *
-         * @return A [Complex] object taht is built from polar coordinates.
+         * @return A [Complex] object that is built from polar coordinates.
          *
          * @author Alberto Miola
          * */

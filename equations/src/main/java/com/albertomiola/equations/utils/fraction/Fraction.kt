@@ -84,7 +84,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
      *
      * @return `true` if the numerator is smaller than the denominator.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     val isProper: Boolean get() = numerator < denominator
 
@@ -93,7 +93,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
      *
      * @return `true` if the numerator is greater than/equal to the denominator.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     val isImproper: Boolean get() = numerator >= denominator
 
@@ -128,7 +128,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
     /**
      * Returns the greatest common divisor of two numbers [a] and [b].
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     private fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 
@@ -148,9 +148,9 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
     /**
      * Returns a **deep** copy of the object and optionally uses the given parameters, if not null.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
-    fun copy(numerator: Int?, denominator: Int?): Fraction {
+    fun copy(numerator: Int? = null, denominator: Int? = null): Fraction {
         return Fraction(
             numerator ?: this.numerator,
             denominator ?: this.denominator,
@@ -162,7 +162,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
      *
      * @return A new [Fraction] object that has inverted numerator and denominator.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     fun inverse(): Fraction = Fraction(denominator, numerator)
 
@@ -171,7 +171,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
      *
      * @return A [Fraction] object that is the sum of this and [other] rational objects.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun plus(other: Fraction): Fraction {
         return Fraction(
@@ -185,7 +185,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
      *
      * @return A [Fraction] object that is the difference of this and [other] rational objects.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun minus(other: Fraction): Fraction {
         return Fraction(
@@ -199,7 +199,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
      *
      * @return A [Fraction] object that is the product of this and [other] rational objects.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun times(other: Fraction): Fraction {
         return Fraction(
@@ -213,7 +213,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
      *
      * @return A [Fraction] object that is the division of this and [other] rational objects.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun div(other: Fraction): Fraction {
         return Fraction(
@@ -225,19 +225,29 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
     /**
      * Increments the fraction by 1.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun inc(): Fraction = this + Fraction(1)
 
     /**
      * Decrements the fraction by 1.
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     operator fun dec(): Fraction = this - Fraction(1)
 
+    /**
+     * Destructures the [numerator] value of this object.
+     *
+     * @author Alberto Miola
+     * */
     operator fun component1(): Int = numerator
 
+    /**
+     * Destructures the [denominator] value of this object.
+     *
+     * @author Alberto Miola
+     * */
     operator fun component2(): Int = denominator
 
     /**
@@ -246,7 +256,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
      * @see createFromString
      * @see createFromDouble
      *
-     * @author Alberto
+     * @author Alberto Miola
      * */
     companion object Factory {
         private val fractionRegex = Regex("""(^-?|^\+?)(?:[1-9][0-9]*|0)(?:/[1-9][0-9]*)?""")
@@ -258,7 +268,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
          * @exception FractionException if [value] is [Double.NaN], [Double.POSITIVE_INFINITY] or
          * [Double.NEGATIVE_INFINITY].
          *
-         * @author Alberto
+         * @author Alberto Miola
          * */
         private fun checkValue(value: Double) {
             if ((value.isNaN()) || (value.isInfinite())) {
@@ -290,7 +300,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
          *
          * @return A [Fraction] object that represents the given [value], if valid.
          *
-         * @author Alberto
+         * @author Alberto Miola
          * */
         fun createFromString(value: String): Fraction {
             if (!fractionRegex.matches(value) || value.contains("/-")) {
@@ -349,7 +359,7 @@ class Fraction(private var num: Int, private var den: Int = 1) : Rational() {
          *
          * @return A [Fraction] object that represents the given [value], if valid.
          *
-         * @author Alberto
+         * @author Alberto Miola
          * */
         fun createFromDouble(value: Double, precision: Double = 1.0e-12): Fraction {
             checkValue(value)

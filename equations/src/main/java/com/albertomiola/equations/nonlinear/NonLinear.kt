@@ -40,6 +40,7 @@ abstract class NonLinear(
     val maxSteps: Int = 20,
 ) {
     init {
+        // Checks whether the string actually represents a valid math expression
         if (!Expression(function, Argument("x")).checkSyntax()) {
             throw NonLinearException("The function '$function' has syntax errors.")
         }
@@ -69,7 +70,8 @@ abstract class NonLinear(
      * To get a meaningful result, it makes sense to compute the rate of convergence only if the
      * algorithm made **at least** 3 (iterations).
      *
-     * If the length of [guesses] is 2 or lower, [Double.NaN] is returned.
+     * @return If the length of [guesses] is 2 or lower, [Double.NaN] is returned. Otherwise, this
+     * method computes the convergence rate of the algorithm.
      *
      * @author Alberto Miola
      * */
@@ -92,6 +94,8 @@ abstract class NonLinear(
      * The efficiency is evaluated only if the convergence is not [Double.NaN]. The formula is:
      *
      * - efficiency = convergenceRate^(1 / max_steps)
+     *
+     * @return The efficiency of the algorithm.
      *
      * @author Alberto Miola
      * */
@@ -135,6 +139,8 @@ abstract class NonLinear(
      *  succession (computed using [convergence]).
      *  - a `efficiency` named field, whose value represents the efficiency of the algorithm
      *  (computed using [efficiency]).
+     *
+     * @return A [NonLinearResult] object with the results of the computation.
      *
      * @author Alberto Miola
      * */

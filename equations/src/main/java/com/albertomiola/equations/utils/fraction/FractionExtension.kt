@@ -29,9 +29,7 @@ fun String.toFraction(): Fraction = Fraction.createFromString(this)
 
 /**
  * Checks whether the String contains a valid representation of a fraction in the 'a/b' format or
- * not.
- *
- * For example, this getter returns `true` if the String is `'1/4'`.
+ * not. For example, this getter returns `true` if the String is `'1/4'`.
  *
  * @return True if the String represents a fraction, false otherwise.
  *
