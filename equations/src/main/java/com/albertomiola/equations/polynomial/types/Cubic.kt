@@ -23,7 +23,13 @@ import kotlin.math.sqrt
  * val eq = Cubic(
  *   a = Complex(2),
  *   b = Complex(1)
- *   c = Complex(5, 6)
+ *   d = Complex(5, 6)
+ * )
+ *
+ * // f(x) = x^3 + (-2 + 6i)x
+ * val eq = Cubic(
+ *   a = Complex(1),
+ *   c = Complex(-2, 6)
  * )
  * ```
  *
@@ -35,7 +41,7 @@ import kotlin.math.sqrt
  * @author Alberto Miola
  * */
 class Cubic(
-    val a: Complex,
+    val a: Complex = Complex(1),
     val b: Complex = Complex(),
     val c: Complex = Complex(),
     val d: Complex = Complex(),
@@ -64,7 +70,7 @@ class Cubic(
     override fun roots(): List<Complex> {
         val two = Complex(2)
         val three = Complex(3)
-        val sigma = Complex(-1.0 / 2.0, 1 / 2 * sqrt(3.0))
+        val sigma = Complex(-1.0 / 2.0, 1.0 / 2.0 * sqrt(3.0))
 
         val d0 = b * b - a * c * three
         val d1 = (b.pow(3.0) * two) - (a * b * c * Complex(9)) + (a * a * d * Complex(27))
@@ -72,11 +78,19 @@ class Cubic(
         val valC = ((d1 + sqrtD) / two).nthRoot(3)
         val constTerm = Complex(-1) / (a * three)
 
-        return listOf(
-            constTerm * (b + valC + (d0 / valC)),
-            constTerm * (b + (valC * sigma) + (d0 / (valC * sigma))),
-            constTerm * (b + (valC * sigma.pow(2.0)) + (d0 / (valC * sigma.pow(2.0)))),
-        )
+        return if (valC.isZero) {
+            listOf(
+                constTerm * (b + valC),
+                constTerm * (b + (valC * sigma)),
+                constTerm * (b + (valC * sigma.pow(2.0))),
+            )
+        } else {
+            listOf(
+                constTerm * (b + valC + (d0 / valC)),
+                constTerm * (b + (valC * sigma) + (d0 / (valC * sigma))),
+                constTerm * (b + (valC * sigma.pow(2.0)) + (d0 / (valC * sigma.pow(2.0)))),
+            )
+        }
     }
 
     fun copy(a: Complex? = null, b: Complex? = null, c: Complex? = null, d: Complex? = null) =

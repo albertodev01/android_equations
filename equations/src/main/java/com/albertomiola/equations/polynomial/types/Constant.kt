@@ -13,11 +13,11 @@ import com.albertomiola.equations.utils.complex.Complex
  * In the context of a polynomial with one variable, the non-zero constant function is a polynomial
  * of degree 0.
  *
- * @property a The only coefficient of the polynomial
+ * @property a The only coefficient of the polynomial.
  *
  * @author Alberto Miola
  * */
-class Constant(val a: Complex = Complex()) : PolynomialEquation(listOf(a)) {
+class Constant(val a: Complex = Complex(1)) : PolynomialEquation(listOf(a)) {
     override val degree: Double
         get() = if (a.isZero) Double.NEGATIVE_INFINITY else 0.0
 

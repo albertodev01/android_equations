@@ -181,6 +181,15 @@ abstract class PolynomialEquation(val coefficients: List<Complex>) {
     }
 
     /**
+     * Evaluates the polynomial a [Double] value [x].
+     *
+     * @return A value that indicates the evaluation of [x] on this polynomial.
+     *
+     * @author Alberto Miola
+     * */
+    fun evaluateOn(x: Double) = evaluateOn(Complex(x))
+
+    /**
      * Evaluates the polynomial a [Int] value [x].
      *
      * @return A value that indicates the evaluation of [x] on this polynomial.
